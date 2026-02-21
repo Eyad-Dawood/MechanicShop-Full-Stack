@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.14.36908.2 d17.14
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MechanicShop.Api", "MechanicShop.Api\MechanicShop.Api.csproj", "{8C564B90-7EBD-4E6E-B1B6-D9ADC382F993}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{8C564B90-7EBD-4E6E-B1B6-D9ADC382F993}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8C564B90-7EBD-4E6E-B1B6-D9ADC382F993}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8C564B90-7EBD-4E6E-B1B6-D9ADC382F993}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8C564B90-7EBD-4E6E-B1B6-D9ADC382F993}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {BB234364-62E0-4B19-BF96-F6B622415975}
+	EndGlobalSection
+EndGlobal
