@@ -21,7 +21,7 @@ public sealed class Customer : AuditableEntity
         _vehicles = vehicles;
     }
 
-    public static Result<Customer> Create(Guid id, string name, string phoneNumber, string email, List<Vehicle> vehicles)
+    public static Result<Customer> Create( string name, string phoneNumber, string email, List<Vehicle> vehicles)
     {
         if (string.IsNullOrWhiteSpace(name))
         {
@@ -47,7 +47,7 @@ public sealed class Customer : AuditableEntity
             return CustomerErrors.EmailInvalid;
         }
 
-        return new Customer(id, name, phoneNumber, email, vehicles);
+        return new Customer(Guid.NewGuid(), name, phoneNumber, email, vehicles);
     }
 
     public Result<Updated> Update(string name, string email, string phoneNumber)

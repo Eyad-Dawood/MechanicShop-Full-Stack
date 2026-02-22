@@ -1,6 +1,6 @@
 ﻿namespace MechanicShop.Domain.Common.Constants
 {
-    public static class DomainConstants
+    public static class ShopConstants
     {
         public const decimal TaxRate = .15m;
 

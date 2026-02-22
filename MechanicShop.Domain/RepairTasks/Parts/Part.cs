@@ -27,7 +27,7 @@ public sealed class Part : AuditableEntity
             return PartErrors.NameRequired;
         }
 
-        if (cost <= 0 || cost > DomainConstants.MaxPartCost)
+        if (cost <= 0 || cost > ShopConstants.MaxPartCost)
         {
             return PartErrors.CostInvalid;
         }

@@ -27,7 +27,7 @@ public sealed class Vehicle : AuditableEntity
         LicensePlate = licensePlate;
     }
 
-    public static Result<Vehicle> Create(Guid id, string make, string model, int year, string licensePlate)
+    public static Result<Vehicle> Create(Guid id,string make, string model, int year, string licensePlate)
     {
         if (string.IsNullOrWhiteSpace(make))
         {
@@ -44,7 +44,7 @@ public sealed class Vehicle : AuditableEntity
             return VehicleErrors.LicensePlateRequired;
         }
 
-        if (year < DomainConstants.MinVehicleYear || year > DateTime.UtcNow.Year)
+        if (year < ShopConstants.MinVehicleYear || year > DateTime.UtcNow.Year)
         {
             return VehicleErrors.YearInvalid;
         }

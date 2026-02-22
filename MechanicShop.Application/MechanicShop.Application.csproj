@@ -7,6 +7,12 @@
   </PropertyGroup>
 
   <ItemGroup>
+	<PackageReference Include="FluentValidation.DependencyInjectionExtensions" Version="12.1.1" />
+    <PackageReference Include="FluentValidation" Version="12.1.1" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="9.0.0" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\MechanicShop.Contracts\MechanicShop.Contracts.csproj" />
     <ProjectReference Include="..\MechanicShop.Domain\MechanicShop.Domain.csproj" />
   </ItemGroup>

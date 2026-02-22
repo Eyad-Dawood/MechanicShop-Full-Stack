@@ -70,5 +70,113 @@ public class WorkOrder : AuditableEntity
         return new WorkOrder(id, vehicleId, startAt, endAt, laborId, spot, WorkOrderState.Scheduled, repairTasks);
     }
 
+    public bool IsEditable => State is not (WorkOrderState.Completed or WorkOrderState.Cancelled or WorkOrderState.InProgress);
+
+    public Result<Updated> UpdateState(WorkOrderState newState)
+    {
+        if (!CanTransitionTo(newState))
+        {
+            return WorkOrderErrors.InvalidStateTransition(State, newState);
+        }
+
+        State = newState;
+
+        return Result.Updated;
+    }
+    public bool CanTransitionTo(WorkOrderState newStatus)
+    {
+        return (State, newStatus) switch
+        {
+            (WorkOrderState.Scheduled, WorkOrderState.InProgress) => true,
+            (WorkOrderState.InProgress, WorkOrderState.Completed) => true,
+            (_, WorkOrderState.Cancelled) when State != WorkOrderState.Completed => true,
+            _ => false
+        };
+    }
+
+
+    public Result<Updated> ClearRepairTasks()
+    {
+        if (!IsEditable)
+        {
+            return WorkOrderErrors.Readonly;
+        }
+
+        _repairTasks.Clear();
+
+        return Result.Updated;
+    }
+
+    public Result<Updated> AddRepairTask(RepairTask repairTask)
+    {
+        if (!IsEditable)
+        {
+            return WorkOrderErrors.Readonly;
+        }
+
+        if (_repairTasks.Any(r => r.Id == repairTask.Id))
+        {
+            return WorkOrderErrors.RepairTaskAlreadyAdded;
+        }
+
+        _repairTasks.Add(repairTask);
+
+        return Result.Updated;
+    }
+
+    public Result<Updated> UpdateTiming(DateTimeOffset startAt, DateTimeOffset endAt)
+    {
+        if (!IsEditable)
+        {
+            return WorkOrderErrors.TimingReadonly(Id.ToString(), State);
+        }
+
+        if (endAt <= startAt)
+        {
+            return WorkOrderErrors.InvalidTiming;
+        }
+
+        StartAtUtc = startAt;
+        EndAtUtc = endAt;
+
+        return Result.Updated;
+    }
+
+    public Result<Updated> UpdateSpot(Spot newSpot)
+    {
+        if (!IsEditable)
+        {
+            return WorkOrderErrors.Readonly;
+        }
+
+        if (!Enum.IsDefined(newSpot))
+        {
+            return WorkOrderErrors.SpotInvalid;
+        }
+
+        Spot = newSpot;
+
+        return Result.Updated;
+    }
+
+    public Result<Updated> UpdateLabor(Guid laborId)
+    {
+        if (!IsEditable)
+        {
+            return WorkOrderErrors.Readonly;
+        }
+
+        if (laborId == Guid.Empty)
+        {
+            return WorkOrderErrors.LaborIdEmpty(Id.ToString());
+        }
+
+        LaborId = laborId;
+
+        return Result.Updated;
+    }
+
+
+
 }
 
