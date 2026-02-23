@@ -176,7 +176,16 @@ public class WorkOrder : AuditableEntity
         return Result.Updated;
     }
 
+    public Result<Updated> Cancel()
+    {
+        if (!CanTransitionTo(WorkOrderState.Cancelled))
+        {
+            return WorkOrderErrors.InvalidStateTransition(State, WorkOrderState.Cancelled);
+        }
 
+        State = WorkOrderState.Cancelled;
+        return Result.Updated;
+    }
 
 }
 

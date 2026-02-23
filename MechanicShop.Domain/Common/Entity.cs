@@ -4,6 +4,7 @@
     {
         public Guid Id { get; }
         private readonly List<DomainEvent> _domainEvents = [];
+        public IReadOnlyCollection<DomainEvent> DomainEvents=> _domainEvents.AsReadOnly();
 
         protected Entity() { }
         protected Entity(Guid id)
@@ -21,7 +22,7 @@
             _domainEvents.Remove(domainEvent);
         }
 
-        public void Clear()
+        public void ClearDomainEvents()
         {
             _domainEvents.Clear();
         }

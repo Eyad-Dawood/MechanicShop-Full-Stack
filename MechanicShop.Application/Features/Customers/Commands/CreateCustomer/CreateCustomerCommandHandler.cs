@@ -43,6 +43,7 @@ public class CreateCustomerCommandHandler(
         }
 
         var createCustomerResult = Customer.Create(
+            Guid.NewGuid(),
             command.Name.Trim(),
             command.PhoneNumber.Trim(),
             command.Email.Trim(),
