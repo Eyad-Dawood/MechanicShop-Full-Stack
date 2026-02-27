@@ -19,7 +19,7 @@
             => new(code, description, ErrorKind.UnExcpected);
 
         public static Error Validation(string code = nameof(Validation), string description = "Validation error")
-            => new(code, description, ErrorKind.Validaiton);
+            => new(code, description, ErrorKind.Validation);
 
         public static Error Conflict(string code = nameof(Conflict), string description = "Conflict error")
             => new(code, description, ErrorKind.Conflict);

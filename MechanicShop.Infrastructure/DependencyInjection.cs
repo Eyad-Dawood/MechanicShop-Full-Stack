@@ -68,12 +68,6 @@ namespace MechanicShop.Infrastructure
                     policy.Requirements.Add(new LaborAssignedRequirement()));
 
             services.AddTransient<IIdentityService, IdentityService>();
-
-            services.AddHybridCache(options => options.DefaultEntryOptions = new HybridCacheEntryOptions
-            {
-                Expiration = TimeSpan.FromMinutes(appSettings.DistributedCacheExpirationMins), // Distribute
-                LocalCacheExpiration = TimeSpan.FromMinutes(appSettings.LocalCacheExpirationInMins), // Local
-            });
             
             services.AddScoped<IWorkOrderPolicy, WorkOrderPolicy>();
 
@@ -84,6 +78,10 @@ namespace MechanicShop.Infrastructure
             services.AddScoped<INotificationService, NotificationService>();
 
             services.AddScoped<IWorkOrderNotifier, SignalRWorkOrderNotifier>();
+
+            services.AddScoped<IAppDbContext, AppDbContext>();
+            
+            services.AddScoped<ApplicationDbContextInitialiser>();
 
             services.AddHostedService<OverdueBookingCleanupService>();
 

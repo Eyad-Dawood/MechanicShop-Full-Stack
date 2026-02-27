@@ -1,5 +1,3 @@
-
-
 namespace MechanicShop.Infrastructure.Data;
 
 public class ApplicationDbContextInitialiser(

@@ -20,6 +20,10 @@ public class AppDbContext(DbContextOptions<AppDbContext> options, IMediator medi
     protected override void OnModelCreating(ModelBuilder builder)
     {
         base.OnModelCreating(builder);
+
+        builder.Ignore<DomainEvent>();
+
+
         builder.ApplyConfigurationsFromAssembly(typeof(AppDbContext).Assembly);
     }
 

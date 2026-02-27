@@ -4,7 +4,7 @@
     {
         Failure,
         UnExcpected,
-        Validaiton,
+        Validation,
         Conflict,
         NotFound,
         Unauthorized,
